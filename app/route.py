@@ -29,11 +29,24 @@ def get_employe(id):
     result = cursor.fetchall()
     return jsonify(result)
 
+@app.route('/employe', methods=["PUT"])
+def update_employe():
+    data = request.get_json()
+    query = f"""UPDATE employé_informatique 
+    SET nom="{data['nom']}", prenom="{data['prenom']}", age="{data['age']}", 
+    profession="{data['profesion']}" 
+    WHERE id='{data['id']}';"""
+    cursor.execute(query)
+    myDB.commit()
+    result_db = get_db_employe()
+    return result_db
+
 @app.route('/employe', methods=["POST"])
 def add_employe():
     data = request.get_json()
     query = f"""INSERT INTO employé_informatique(nom, prenom, age, profession) 
-    VALUES ("{data['nom']}", "{data['prenom']}", "{data['age']}", "{data['profession']}");"""
+    VALUES ("{data['nom']}", "{data['prenom']}", "{data['age']}", 
+    "{data['profession']}");"""
     cursor.execute(query)
     myDB.commit()
     result_db = get_db_employe()
@@ -64,6 +77,18 @@ def get_matos(id):
     cursor.execute(query)
     result = cursor.fetchall()
     return jsonify(result)
+
+@app.route('/materiel', methods=["PUT"])
+def update_matos():
+    data = request.get_json()
+    query = f"""UPDATE materiel 
+    SET nom_du_produit="{data['nom_du_produit']}", 
+    dimensions="{data['dimensions']}", etat="{data['etat']}" 
+    WHERE id='{data['id']}';"""
+    cursor.execute(query)
+    myDB.commit()
+    result_db = get_db_matos()
+    return result_db
 
 @app.route('/materiel', methods=["POST"])
 def add_matos():
