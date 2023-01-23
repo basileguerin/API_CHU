@@ -23,8 +23,7 @@ def populate_tables():
         dimensions = values[0][1]
         etat = values[0][2]
         query = f"""INSERT INTO materiel 
-        VALUES ("{id}", "{nom_du_produit}", 
-        "{dimensions}", "{etat}");"""
+        VALUES ("{id}", "{nom_du_produit}", "{dimensions}", "{etat}");"""
         cursor.execute(query)
         myDB.commit()
 
@@ -37,8 +36,7 @@ def populate_tables():
         age = values[0][2]
         profession = values[0][3]
         query = f"""INSERT INTO employé_informatique 
-        VALUES ("{id}", "{nom}", "{prenom}", 
-        "{age}", "{profession}");"""
+        VALUES ("{id}", "{nom}", "{prenom}", "{age}", "{profession}");"""
         cursor.execute(query)
         myDB.commit()
 
